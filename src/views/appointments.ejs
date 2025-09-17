@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Appointments</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 20px; }
+    nav a { margin-right: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f3f3f3; }
+    .tag { padding: 2px 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/staff">Staff</a>
+    <a href="/services">Services</a>
+    <a href="/appointments">Appointments</a>
+  </nav>
+
+  <h1>Appointments</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>When</th>
+        <th>Customer</th>
+        <th>Staff</th>
+        <th>Services</th>
+        <th>Status</th>
+        <th>Invoice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% appointments.forEach((a) => { %>
+        <tr>
+          <td>
+            <div><%= new Date(a.startsAt).toLocaleString() %></div>
+            <div style="color:#666; font-size:12px;">End: <%= new Date(a.endsAt).toLocaleTimeString() %></div>
+          </td>
+          <td><%= a.customer.user.firstName %> <%= a.customer.user.lastName %></td>
+          <td><%= a.staff.user.firstName %> <%= a.staff.user.lastName %></td>
+          <td>
+            <% a.services.forEach((as) => { %>
+              <div>- <%= as.service.name %> ($<%= (as.priceCents/100).toFixed(2) %>, <%= as.durationMin %> min)</div>
+            <% }) %>
+          </td>
+          <td><span class="tag"><%= a.status %></span></td>
+          <td>
+            <% if (a.invoice) { %>
+              <div>Total: $<%= (a.invoice.totalCents/100).toFixed(2) %></div>
+              <div>Status: <%= a.invoice.status %></div>
+            <% } else { %>
+              <em>No invoice</em>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
+
