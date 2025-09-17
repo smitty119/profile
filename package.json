@@ -1,0 +1,32 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "db:seed": "node dist/seed.js",
+    "prepare": "prisma generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smitty119/profile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smitty119/profile/issues"
+  },
+  "homepage": "https://github.com/smitty119/profile#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.5.1",
+    "prisma": "^6.16.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.2"
+  }
+}
