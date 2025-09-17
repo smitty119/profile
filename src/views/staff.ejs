@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Staff</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 20px; }
+    nav a { margin-right: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f3f3f3; }
+    ul { margin: 0; padding-left: 16px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/staff">Staff</a>
+    <a href="/services">Services</a>
+    <a href="/appointments">Appointments</a>
+  </nav>
+
+  <h1>Staff</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Skills</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% staff.forEach((s) => { %>
+        <tr>
+          <td><%= s.user.firstName %> <%= s.user.lastName %></td>
+          <td><%= s.title || '' %></td>
+          <td>
+            <ul>
+              <% s.skills.forEach((sk) => { %>
+                <li><%= sk.service.name %> <%= sk.proficiency ? `(⭐ ${sk.proficiency})` : '' %></li>
+              <% }) %>
+            </ul>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
+

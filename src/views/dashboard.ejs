@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salon Dashboard</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 20px; }
+    header { display: flex; justify-content: space-between; align-items: center; }
+    nav a { margin-right: 12px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 16px; }
+    .card { padding: 14px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f3f3f3; }
+  </style>
+  </head>
+  <body>
+    <header>
+      <h1>Salon Dashboard</h1>
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/customers">Customers</a>
+        <a href="/staff">Staff</a>
+        <a href="/services">Services</a>
+        <a href="/appointments">Appointments</a>
+      </nav>
+    </header>
+
+    <section class="cards">
+      <div class="card"><strong>Customers</strong><div><%= customerCount %></div></div>
+      <div class="card"><strong>Staff</strong><div><%= staffCount %></div></div>
+      <div class="card"><strong>Services</strong><div><%= serviceCount %></div></div>
+    </section>
+
+    <h2>Upcoming Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>Customer</th>
+          <th>Staff</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% upcomingAppts.forEach((a) => { %>
+          <tr>
+            <td><%= new Date(a.startsAt).toLocaleString() %></td>
+            <td><%= a.customer.user.firstName %> <%= a.customer.user.lastName %></td>
+            <td><%= a.staff.user.firstName %> <%= a.staff.user.lastName %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
+

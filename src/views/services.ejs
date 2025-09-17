@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 20px; }
+    nav a { margin-right: 12px; }
+    .category { margin-top: 18px; }
+    .service { border: 1px solid #eee; border-radius: 8px; padding: 10px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/staff">Staff</a>
+    <a href="/services">Services</a>
+    <a href="/appointments">Appointments</a>
+  </nav>
+
+  <h1>Services</h1>
+  <% categories.forEach((cat) => { %>
+    <div class="category">
+      <h2><%= cat.name %></h2>
+      <% cat.services.forEach((svc) => { %>
+        <div class="service">
+          <div><strong><%= svc.name %></strong></div>
+          <div><%= svc.description || '' %></div>
+          <div>Price: $<%= (svc.priceCents / 100).toFixed(2) %> • Duration: <%= svc.durationMin %> min</div>
+        </div>
+      <% }) %>
+    </div>
+  <% }) %>
+</body>
+</html>
+
